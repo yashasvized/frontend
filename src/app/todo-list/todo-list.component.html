@@ -1,0 +1,69 @@
+<app-header></app-header>
+<div class="container" style="margin-top: 30px">
+
+<div class="row">
+  <div class="col-lg-3 col-12">
+    <h2>Click here to start making list <span *ngIf="friendName">for {{friendName}}</span></h2>
+    <button class="btn btn-primary" (click)="makeVisible()">Make a new list</button>
+    <br>
+  </div>
+  <div class="col-lg-6 col-12" style="margin-top: 30px">
+      <accordion [closeOthers]=true >
+          <accordion-group  [isDisabled]="disable" *ngFor="let group of todolist;let i = index">
+              <span accordion-heading>
+                  <i class='fa fa-users'></i><del *ngIf="todolist[i].checked">{{group.title}}</del><span *ngIf="!todolist[i].checked">{{group.title}}</span> <button class="btn btn-primary float-right" (click)="deleteHeader(i)" >Delete</button><button style="margin-right: 3px" class="btn btn-success float-right" (click)="editHeader(i)" >Edit</button><input
+                  type="checkbox"
+                  style="margin-right: 10px;margin-top:10px"
+                  class="float-right"
+                  (click)="change(i)"
+                  value="todolist[i].checked"
+                  [checked]="todolist[i].checked"
+                  
+                  /> 
+                  <div *ngIf="group.edit">
+                      <button class="btn btn-sm btn-primary float-middle"  (click)="updateHeader(i)" >Update</button><p>Please click on update to continue</p>
+                      <input [(ngModel)]="edititem" class="form-control" style="width: 50%" type="text">
+                  </div>
+                </span>
+              
+                <button class="btn btn-primary float-right" (click)="addsub(i)">Add sub item?</button>
+                <input [(ngModel)]="subitem" class="form-control" style="width: 50%" type="text">
+              <ul>
+                <div *ngFor="let subs of group.subitem;let j = index" style="padding-top: 10px">
+                    <li ><s *ngIf="group.subitem[j].checked">{{subs.subitem}}</s><span *ngIf="!group.subitem[j].checked">{{subs.subitem}}</span><button class="btn btn-sm btn-primary float-right" (click)="deletesubitem(i,j)" >Delete</button><button style="margin-right: 3px" class="btn btn-sm btn-success float-right" (click)="editsub(i,j)" >Edit</button><input
+                      type="checkbox"
+                      style="margin-right: 10px;margin-top:10px"
+                      class="float-right"
+                      (click)="changesub(i,j)"
+                      value="todolist[i].checked"
+                      [checked]="group.subitem[j].checked"
+                    /> </li>
+                    <div *ngIf="subs.subedit">
+                        <input [(ngModel)]="edititem" class="form-control" style="width: 50%" type="text">
+                        <button class="btn btn-sm btn-primary"  (click)="updateSub(i,j)" >Update</button><p>Please click on update to continue</p>
+                    </div>
+                  <br>
+                </div>
+              </ul>
+          </accordion-group>
+        </accordion>
+  </div>
+  <div class="col-lg-3 col-12" *ngIf="!friendName">
+    <h2>History of friend actions</h2>
+    <li *ngFor="let action of historyactions">{{action.friendName}} did {{action.action}}</li>
+    <br>
+  </div>
+</div>
+<br>
+<div *ngIf="visible" class="row">
+    <div class="col-lg-3 col-12">
+      <label for="inputList">List item</label>
+      <br>
+      <input type="text"  id="inputList" class="form-control" [(ngModel)]="list" placeholder="list-item" required>
+      <br>
+      <button class="btn btn-primary" (click)="addToList(list)">Add this item</button>
+    </div>
+  </div>
+</div>
+
+<button [disabled]="stop" *ngIf="!friendName" class="btn btn-danger"  tabindex="0" (keyup.enter)="undo()" (click)="undo()" style="margin-left: 50px">Undo Friend actions</button>

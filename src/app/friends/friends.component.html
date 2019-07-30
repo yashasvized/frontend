@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <h2>Add friends</h2>
+      <ul class="list-group">
+        <li *ngFor="let user of onlineList;let i = index" class="list-group-item">{{user.firstName}} {{user.lastName}}<span *ngIf="user.online">(Online)</span><button class="btn btn-success float-right" (click)="addFriend(user,i)">Add Friend</button></li>
+      </ul>
+    </div>
+    
+  <div class="col-lg-4">
+    <h2>Friend request sent</h2>
+    <ul class="list-group">
+      <li *ngFor="let user of friendreqsent" class="list-group-item">{{user.userName}}</li>
+    </ul>
+  </div>
+
+    <div class="col-lg-4">
+      <h2>Friend request recieved</h2>
+      <ul class="list-group">
+        <li *ngFor="let user of friendreqrecieved;let i = index " class="list-group-item">{{user.userName}}<button class="btn btn-success float-right" (click)="acceptFriend(user,i)">
+            Accept request
+        </button></li>
+      </ul>
+</div>
+
+    <div class="col-lg-4">
+      <h2>Friend List</h2>
+      <p *ngIf="friends==[]">No friends </p>
+      <ul class="list-group">
+        <li *ngFor="let user of friends" class="list-group-item">{{user.friendName}}<span *ngIf="user.online">(Online)</span><button class="btn btn-success float-right" (click)="gotofriendList(user)">Edit List</button></li>
+      </ul>
+</div>
+
+
+  </div>
+</div>
+

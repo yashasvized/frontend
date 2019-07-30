@@ -1,0 +1,34 @@
+.col-lg-6{
+    margin-top: 150px;
+    margin-left: 20px;
+}
+
+@media (max-width: 980px) { 
+    .col-lg-6{
+        margin-top: 50px;
+    }
+}
+p{
+    font-weight: 400
+}
+
+html{
+    background-color: rgba(252, 231, 231, 0.5)
+}
+
+.form-control{
+    width: 90%;
+    background: transparent;
+    border-radius: 0px;
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+
+.form-thing{
+    box-shadow: 1px 1px 30px 10px black
+}
+
+.err {
+    border-color: #FF0000;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+  }
